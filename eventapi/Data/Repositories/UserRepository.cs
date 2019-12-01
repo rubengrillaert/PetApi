@@ -30,6 +30,11 @@ namespace petApi.Data.Repositories
             _users.Add(user);
         }
 
+        public List<Appointment> GetAppointmentsByUserId(int id)
+        {
+            return _users.Include(u => u.Appointments).Include(u => u.Pets).FirstOrDefault(u => u.Id == id).Appointments.ToList();
+        }
+
         public User GetByEmail(string email)
         {
             return _users.FirstOrDefault(u => u.Email == email);
@@ -40,7 +45,17 @@ namespace petApi.Data.Repositories
             return _users.FirstOrDefault(u => u.Id == id);
         }
 
-        public IEnumerable<User> GetUsers()
+        public User GetByUsername(string username)
+        {
+            return _users.FirstOrDefault(u => u.Username == username);
+        }
+
+        public List<Pet> GetPetsByUserId(int id)
+        {
+            return _users.Include(u => u.Pets).FirstOrDefault(u => u.Id == id).Pets.ToList();
+        }
+
+        public List<User> GetUsers()
         {
             return _users.ToList();
         }
@@ -53,6 +68,11 @@ namespace petApi.Data.Repositories
         public bool UserExists(string email)
         {
             return _dbContext.User.Where(u => u.Email == email).FirstOrDefault() != null;
+        }
+
+        public void UpdateUser(User user)
+        {
+            _dbContext.User.Update(user);
         }
         #endregion
     }

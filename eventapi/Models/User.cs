@@ -1,4 +1,5 @@
-﻿using System;
+﻿using petApi.DTO_s;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -41,6 +42,22 @@ namespace petApi.Models
         public void AddAppointment(Appointment appointment)
         {
             Appointments.Add(appointment);
+        }
+
+        public static UserInfoDTO MapUserToUserInfoDTO(User usr)
+        {
+            return new UserInfoDTO()
+            {
+                Id = usr.Id,
+                City = usr.City,
+                Country = usr.Country,
+                Email = usr.Email,
+                Housenumber = usr.Housenumber,
+                Name = usr.Name,
+                PostalCode = usr.PostalCode,
+                Street = usr.Street,
+                Username = usr.Username
+            };
         }
         #endregion
     }

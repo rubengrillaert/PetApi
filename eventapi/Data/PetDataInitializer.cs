@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using petApi.Models;
+using System;
 using System.Threading.Tasks;
 
 namespace eventapi.Data
@@ -20,6 +21,27 @@ namespace eventapi.Data
             _dbContext.Database.EnsureDeleted();
             if (_dbContext.Database.EnsureCreated())
             {
+                Pet pet = new Pet()
+                {
+                    BirthDate = new DateTime(),
+                    Description = "Test pet",
+                    Name = "Nap",
+                    Picture = "picture url"
+                };
+
+                Appointment appointment = new Appointment()
+                {
+                    City = "Oosterzele",
+                    Date = new DateTime(),
+                    Description = "Test appointment",
+                    Doctor = "O'Mels",
+                    Housenumber = "31",
+                    Pet = pet,
+                    PostalCode = "9860",
+                    Street = "Patrijzenstraat",
+                    Title = "Laserpen gameplay"
+                };
+
                 User user = new User()
                 {
                     Email = "ruben.grillaert@hotmail.com",
@@ -31,9 +53,16 @@ namespace eventapi.Data
                     Street = "Kalkensteenweg",
                     Username = "Wazzaaaa97"
                 };
+
+                user.AddAppointment(appointment);
+                user.AddPet(pet);
+
+
                 _dbContext.User.Add(user);
                 await CreateUser("Wazzaaaa97", user.Email, "P@ssword123");
             }
+
+            _dbContext.SaveChanges();
         }
 
         private async Task CreateUser(string username, string email, string password)

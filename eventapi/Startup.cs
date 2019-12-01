@@ -35,6 +35,8 @@ namespace eventapi
 
             services.AddScoped<PetDataInitializer>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IPetRepository, PetRepository>();
+            services.AddScoped<IAppointmentRepository, AppointmentRepository>();
 
             services.AddOpenApiDocument(c =>
             {
