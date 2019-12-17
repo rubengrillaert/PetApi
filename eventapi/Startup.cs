@@ -31,7 +31,7 @@ namespace eventapi
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddDbContext<PetContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("EventContext")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<PetDataInitializer>();
             services.AddScoped<IUserRepository, UserRepository>();
@@ -55,10 +55,19 @@ namespace eventapi
             });
 
             services.AddIdentity<IdentityUser, IdentityRole>(cfg => cfg.User.RequireUniqueEmail = true).AddEntityFrameworkStores<PetContext>();
-
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("USER", policy =>
+                {
+                    policy.RequireClaim("USER");
+                    policy.RequireRole("USER");
+                    policy.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
+                });
+            });
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
             })
             .AddJwtBearer(x =>
             {

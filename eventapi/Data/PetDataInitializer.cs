@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using petApi.Models;
 using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace eventapi.Data
@@ -9,11 +10,13 @@ namespace eventapi.Data
     {
         private readonly PetContext _dbContext;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public PetDataInitializer(PetContext dbContext, UserManager<IdentityUser> userManager)
+        public PetDataInitializer(PetContext dbContext, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _dbContext = dbContext;
             _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         public async Task InitializeData()
@@ -21,6 +24,7 @@ namespace eventapi.Data
             _dbContext.Database.EnsureDeleted();
             if (_dbContext.Database.EnsureCreated())
             {
+                await CreateRoles();
                 Pet pet = new Pet()
                 {
                     BirthDate = new DateTime(),
@@ -69,6 +73,12 @@ namespace eventapi.Data
         {
             var user = new IdentityUser { UserName = username, Email = email };
             await _userManager.CreateAsync(user, password);
+            await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "USER"));
+            await _userManager.AddToRoleAsync(user, "USER");
+        }
+
+        private async Task CreateRoles() {
+            await _roleManager.CreateAsync(new IdentityRole("USER"));
         }
 
     }

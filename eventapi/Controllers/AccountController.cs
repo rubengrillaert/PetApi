@@ -24,6 +24,7 @@ namespace eventapi.Controllers
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
+        //private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IUserRepository _userRepository;
         private readonly IConfiguration _config;
 
@@ -80,6 +81,8 @@ namespace eventapi.Controllers
                 Street = model.Street
             };
             var result = await _userManager.CreateAsync(user, model.Password);
+            await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "USER"));
+            await _userManager.AddToRoleAsync(user, "USER");
 
             if (result.Succeeded)
             {
