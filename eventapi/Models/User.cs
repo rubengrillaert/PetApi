@@ -10,14 +10,10 @@ namespace petApi.Models
     {
         #region Properties
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string Surename { get; set; }
+        public string Familyname { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
-        public string Street { get; set; }
-        public string Housenumber { get; set; }
-        public string PostalCode { get; set; }
-        public string City { get; set; }
-        public string Country { get; set; }
         #endregion
 
         #region Collections
@@ -49,13 +45,9 @@ namespace petApi.Models
             return new UserInfoDTO()
             {
                 Id = usr.Id,
-                City = usr.City,
-                Country = usr.Country,
                 Email = usr.Email,
-                Housenumber = usr.Housenumber,
-                Name = usr.Name,
-                PostalCode = usr.PostalCode,
-                Street = usr.Street,
+                Surename = usr.Surename,
+                Familyname = usr.Familyname,
                 Username = usr.Username
             };
         }

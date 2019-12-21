@@ -53,14 +53,10 @@ namespace petApi.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
+                    Surename = table.Column<string>(nullable: true),
+                    Familyname = table.Column<string>(nullable: true),
                     Username = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    Street = table.Column<string>(nullable: true),
-                    Housenumber = table.Column<string>(nullable: true),
-                    PostalCode = table.Column<string>(nullable: true),
-                    City = table.Column<string>(nullable: true),
-                    Country = table.Column<string>(nullable: true)
+                    Email = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

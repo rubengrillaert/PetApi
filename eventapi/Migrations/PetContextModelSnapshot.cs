@@ -244,19 +244,11 @@ namespace petApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("City");
-
-                    b.Property<string>("Country");
-
                     b.Property<string>("Email");
 
-                    b.Property<string>("Housenumber");
+                    b.Property<string>("Familyname");
 
-                    b.Property<string>("Name");
-
-                    b.Property<string>("PostalCode");
-
-                    b.Property<string>("Street");
+                    b.Property<string>("Surename");
 
                     b.Property<string>("Username");
 

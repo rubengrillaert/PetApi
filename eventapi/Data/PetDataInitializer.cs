@@ -49,12 +49,8 @@ namespace eventapi.Data
                 User user = new User()
                 {
                     Email = "ruben.grillaert@hotmail.com",
-                    City = "Wetteren",
-                    Country = "België",
-                    Housenumber = "3",
-                    Name = "Xenox",
-                    PostalCode = "9230",
-                    Street = "Kalkensteenweg",
+                    Surename = "Ruben",
+                    Familyname = "Grillaert",
                     Username = "Wazzaaaa97"
                 };
 

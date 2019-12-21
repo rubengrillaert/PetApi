@@ -73,12 +73,8 @@ namespace eventapi.Controllers
             {
                 Username = model.UserName,
                 Email = model.Email,
-                City = model.City,
-                Country = model.Country,
-                Housenumber = model.Housenumber,
-                Name = model.Name,
-                PostalCode = model.PostalCode,
-                Street = model.Street
+                Surename = model.Surename,
+                Familyname = model.Familyname
             };
             var result = await _userManager.CreateAsync(user, model.Password);
             await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "USER"));

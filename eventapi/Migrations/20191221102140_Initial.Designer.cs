@@ -10,7 +10,7 @@ using eventapi.Data;
 namespace petApi.Migrations
 {
     [DbContext(typeof(PetContext))]
-    [Migration("20191217140859_Initial")]
+    [Migration("20191221102140_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -246,19 +246,11 @@ namespace petApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("City");
-
-                    b.Property<string>("Country");
-
                     b.Property<string>("Email");
 
-                    b.Property<string>("Housenumber");
+                    b.Property<string>("Familyname");
 
-                    b.Property<string>("Name");
-
-                    b.Property<string>("PostalCode");
-
-                    b.Property<string>("Street");
+                    b.Property<string>("Surename");
 
                     b.Property<string>("Username");
 
