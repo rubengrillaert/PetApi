@@ -11,6 +11,7 @@ namespace petApi.Data.IRepository
         Pet GetPetById(int id);
         void UpdatePet(Pet pet);
         void AddPet(Pet pet);
+        void DeletePet(int id);
         void SaveChanges();
     }
 }

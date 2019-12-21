@@ -11,6 +11,7 @@ namespace petApi.Data.IRepository
         List<Appointment> GetAppointments();
         Appointment GetAppointmentById(int id);
         void AddAppointment(Appointment appointment);
+        void DeleteAppointment(int id);
         void SaveChanges();
     }
 }

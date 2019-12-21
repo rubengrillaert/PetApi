@@ -77,6 +77,15 @@ namespace petApi.Models
             }
             return null;
         }
+
+        public static Pet MapEditPetDTOToPet(EditPetDTO editPetDTO, Pet pet)
+        {
+            pet.BirthDate = editPetDTO.BirthDate;
+            pet.Description = editPetDTO.Description;
+            pet.Name = editPetDTO.Name;
+            pet.Picture = editPetDTO.Picture;
+            return pet;
+        }
         #endregion
     }
 }

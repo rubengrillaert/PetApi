@@ -37,6 +37,47 @@ namespace petApi.Controllers
             }
             return NotFound();
         }
+
+        [HttpPut]
+        public ActionResult EditPet(EditPetDTO editPetDTO)
+        {
+            Pet pet = _petRepository.GetPetById(editPetDTO.PetId);
+            if(pet == null)
+            {
+                return BadRequest();
+            }
+            try
+            {
+                Pet updatedPet = Pet.MapEditPetDTOToPet(editPetDTO, pet);
+                _petRepository.UpdatePet(updatedPet);
+                _petRepository.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
+            return Ok();
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult DeletePet(int id)
+        {
+            Pet pet = _petRepository.GetPetById(id);
+            if (pet == null)
+            {
+                return NotFound();
+            }
+            try
+            {
+                _petRepository.DeletePet(id);
+                _petRepository.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
+            return Ok();
+        }
         #endregion
     }
 }

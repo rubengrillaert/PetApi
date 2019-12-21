@@ -25,6 +25,12 @@ namespace petApi.Data.Repositories
             _appointments.Add(appointment);
         }
 
+        public void DeleteAppointment(int id)
+        {
+            Appointment appointment = _appointments.FirstOrDefault(a => a.Id == id);
+            _appointments.Remove(appointment);
+        }
+
         public Appointment GetAppointmentById(int id)
         {
             return _appointments.Include(a => a.Pet).FirstOrDefault(a => a.Id == id);

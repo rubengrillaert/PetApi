@@ -37,6 +37,26 @@ namespace petApi.Controllers
             }
             return NotFound();
         }
+
+        [HttpDelete("{id}")]
+        public ActionResult DeleteAppointment(int id)
+        {
+            Appointment appointment = _appointmentRepository.GetAppointmentById(id);
+            if (appointment == null)
+            {
+                return NotFound();
+            }
+            try
+            {
+                _appointmentRepository.DeleteAppointment(id);
+                _appointmentRepository.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
+            return Ok();
+        }
         #endregion
     }
 }

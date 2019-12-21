@@ -25,6 +25,12 @@ namespace petApi.Data.Repositories
             _pets.Add(pet);
         }
 
+        public void DeletePet(int id)
+        {
+            Pet pet = _pets.FirstOrDefault(p => p.Id == id);
+            _pets.Remove(pet);
+        }
+
         public Pet GetPetById(int id)
         {
             return _pets.Include(p => p.Appointments).FirstOrDefault(p => p.Id == id);
