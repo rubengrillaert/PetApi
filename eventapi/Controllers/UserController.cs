@@ -95,6 +95,7 @@ namespace petApi.Controllers
                             pet.AddAppointment(appointment);
                             _petRepository.UpdatePet(pet);
                             _userRepository.SaveChanges();
+                            _petRepository.SaveChanges();
                             return Ok();
                         }
                     }
