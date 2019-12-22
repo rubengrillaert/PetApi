@@ -52,7 +52,8 @@ namespace eventapi.Controllers
 
                 if (result.Succeeded)
                 {
-                    string token = GetToken(user);
+                    string id = _userRepository.GetByUsername(model.UserName).Id.ToString();
+                    string token = GetToken(user, id);
                     return Created("", token); //returns only the token                    
                 }
             }
@@ -84,7 +85,8 @@ namespace eventapi.Controllers
             {
                 _userRepository.AddUser(usr);
                 _userRepository.SaveChanges();
-                string token = GetToken(user);
+                string id = _userRepository.GetByUsername(model.UserName).Id.ToString();
+                string token = GetToken(user, id);
                 return Created("", token);
             }
             return BadRequest();
@@ -116,12 +118,13 @@ namespace eventapi.Controllers
             return user == null;
         }
 
-        private String GetToken(IdentityUser user)
+        private String GetToken(IdentityUser user, string id)
         {
             var claims = new[]
             {
               new Claim(JwtRegisteredClaimNames.Sub, user.Email),
-              new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName)
+              new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName),
+              new Claim("Id", id)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
