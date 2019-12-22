@@ -54,7 +54,7 @@ namespace eventapi.Controllers
                 {
                     string id = _userRepository.GetByUsername(model.UserName).Id.ToString();
                     string token = GetToken(user, id);
-                    return Created("", token); //returns only the token                    
+                    return Created(token); //returns only the token                    
                 }
             }
             return BadRequest();
@@ -87,7 +87,7 @@ namespace eventapi.Controllers
                 _userRepository.SaveChanges();
                 string id = _userRepository.GetByUsername(model.UserName).Id.ToString();
                 string token = GetToken(user, id);
-                return Created("", token);
+                return Ok(token);
             }
             return BadRequest();
         }
