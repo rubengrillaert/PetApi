@@ -10,7 +10,7 @@ using eventapi.Data;
 namespace petApi.Migrations
 {
     [DbContext(typeof(PetContext))]
-    [Migration("20191221102140_Initial")]
+    [Migration("20191222093846_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
