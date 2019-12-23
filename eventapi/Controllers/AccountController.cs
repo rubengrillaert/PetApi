@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using petApi.Data.IRepository;
+using petApi.DTO_s;
 using petApi.Models;
 
 namespace eventapi.Controllers
@@ -98,11 +99,18 @@ namespace eventapi.Controllers
         /// <returns>true if the username is not registered yet</returns>
         /// <param name="email">Email.</param>/
         [AllowAnonymous]
-        [HttpGet("checkusername")]
+        [HttpGet("username/{username}")]
         public async Task<ActionResult<Boolean>> CheckAvailableUserName(string username)
         {
             var user = await _userManager.FindByNameAsync(username);
-            return user == null;
+            if (user == null)
+            {
+                return Ok(new UsernameCheck() { Username = true });
+            }
+            else
+            {
+                return Ok(new UsernameCheck() { Username = false });
+            }
         }
 
         /// <summary>
@@ -111,11 +119,18 @@ namespace eventapi.Controllers
         /// <returns>true if the email is not registered yet</returns>
         /// <param name="email">Email.</param>/
         [AllowAnonymous]
-        [HttpGet("checkemail")]
+        [HttpGet("{email}")]
         public async Task<ActionResult<Boolean>> CheckAvailableEmaile(string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
-            return user == null;
+            if(user == null)
+            {
+                return Ok(new EmailCheck() { Email = true });
+            }
+            else
+            {
+                return Ok(new EmailCheck() { Email = false });
+            }
         }
 
         private String GetToken(IdentityUser user, string id)
