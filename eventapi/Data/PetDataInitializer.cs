@@ -55,6 +55,7 @@ namespace eventapi.Data
                 };
 
                 user.AddAppointment(appointment);
+                pet.AddAppointment(appointment);
                 user.AddPet(pet);
 
 
