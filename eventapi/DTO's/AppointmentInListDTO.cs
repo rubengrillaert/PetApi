@@ -11,5 +11,6 @@ namespace petApi.DTO_s
         public int Id { get; set; }
         public string Title { get; set; }
         public string Pet { get; set; }
+        public DateTime Date { get; set; }
     }
 }
