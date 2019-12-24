@@ -55,7 +55,6 @@ namespace petApi.Models
                     Id = pet.Id,
                     Picture = pet.Picture,
                     Name = pet.Name,
-                    Appointments = pet.Appointments.Select(a => Appointment.MapAppointmentToAppointmentInListPetInfoDTO(a)).ToList(),
                     BirthDate = pet.BirthDate,
                     Description = pet.Description
                 };

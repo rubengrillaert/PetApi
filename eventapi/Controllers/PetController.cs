@@ -35,7 +35,18 @@ namespace petApi.Controllers
             {
                 return Ok(Pet.MapPetToPetInfoDTO(pet));
             }
-            return NotFound();
+            return BadRequest();
+        }
+
+        [HttpGet("pet/appointments/{id}")]
+        public ActionResult<List<AppointmentInListDTO>> GetAppointmentsOfPet(int id)
+        {
+            Pet pet = _petRepository.GetPetById(id);
+            if(pet != null)
+            {
+                return Ok(pet.Appointments.Select(a => Appointment.MapAppointmentToAppointmentInListDTO(a)));
+            }
+            return BadRequest();
         }
 
         [HttpPut]

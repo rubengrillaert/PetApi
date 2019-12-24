@@ -15,9 +15,5 @@ namespace petApi.DTO_s
         public DateTime BirthDate { get; set; }
         public string Description { get; set; }
         #endregion
-
-        #region Collections
-        public ICollection<AppointmentInListPetInfoDTO> Appointments { get; set; }
-        #endregion
     }
 }
