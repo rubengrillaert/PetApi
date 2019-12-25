@@ -27,7 +27,7 @@ namespace eventapi.Data
                 await CreateRoles();
                 Pet pet = new Pet()
                 {
-                    BirthDate = DateTime.Now,
+                    BirthDate = new DateTime(),
                     Description = "Test pet",
                     Name = "Nap",
                     Picture = "picture url"
@@ -36,7 +36,7 @@ namespace eventapi.Data
                 Appointment appointment = new Appointment()
                 {
                     City = "Oosterzele",
-                    Date = DateTime.Now,
+                    Date = new DateTime(),
                     Description = "Test appointment",
                     Doctor = "O'Mels",
                     Housenumber = "31",

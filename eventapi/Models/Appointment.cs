@@ -37,8 +37,7 @@ namespace petApi.Models
                 {
                     Id = appointment.Id,
                     Pet = appointment.Pet.Name,
-                    Title = appointment.Title,
-                    Date = appointment.Date
+                    Title = appointment.Title
                 };
             }
             return null;
