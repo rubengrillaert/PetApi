@@ -14,6 +14,7 @@ namespace petApi.DTO_s
         public string Picture { get; set; }
         public DateTime BirthDate { get; set; }
         public string Description { get; set; }
+        public IEnumerable<AppointmentInListDTO> Appointments { get; set; }
         #endregion
     }
 }
