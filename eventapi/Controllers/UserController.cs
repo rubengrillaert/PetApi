@@ -68,7 +68,8 @@ namespace petApi.Controllers
                         user.AddPet(pet);
                         _userRepository.UpdateUser(user);
                         _userRepository.SaveChanges();
-                        return Ok();
+                        int id = _userRepository.GetPetsByUserId(addedPet.UserId).Where(p => p.Name == addedPet.Name && p.Picture == addedPet.Picture).First().Id;
+                        return Ok(id);
                     }
                 }
             }
@@ -96,7 +97,8 @@ namespace petApi.Controllers
                             _petRepository.UpdatePet(pet);
                             _userRepository.SaveChanges();
                             _petRepository.SaveChanges();
-                            return Ok();
+                            int id = _userRepository.GetAppointmentsByUserId(addedAppointment.UserId).Where(a => a.Doctor == addedAppointment.Doctor && a.Title == addedAppointment.Title && a.Description == addedAppointment.Description && a.Street == addedAppointment.Street).First().Id;
+                            return Ok(id);
                         }
                     }
                 }
