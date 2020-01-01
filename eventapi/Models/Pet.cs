@@ -28,6 +28,26 @@ namespace petApi.Models
         #endregion
 
         #region Methodes
+        public DateTime TextToDate(string textDate)
+        {
+            int year = Int16.Parse(textDate.Substring(0, 4));
+            int month = Int16.Parse(textDate.Substring(5, 2));
+            int day = Int16.Parse(textDate.Substring(8, 2));
+            int houres = Int16.Parse(textDate.Substring(11, 2));
+            int minutes = Int16.Parse(textDate.Substring(14, 2));
+            return new DateTime(year, month, day, houres, minutes, 0);
+        }
+
+        public string DateToText(DateTime date)
+        {
+            string month = date.Month < 10 ? "0" + date.Month : "" + date.Month;
+            string day = date.Day < 10 ? "0" + date.Day : "" + date.Day;
+            string houres = date.Hour < 10 ? "0" + date.Hour : "" + date.Hour;
+            string minutes = date.Minute < 10 ? "0" + date.Minute : "" + date.Minute;
+
+            return "" + date.Year + "-" + month + "-" + day + "-" + houres + "-" + minutes;
+        }
+
         public void AddAppointment(Appointment appointment)
         {
             Appointments.Add(appointment);
@@ -56,7 +76,7 @@ namespace petApi.Models
                     Picture = pet.Picture,
                     Name = pet.Name,
                     Appointments = pet.Appointments.Select(a => Appointment.MapAppointmentToAppointmentInListDTO(a)).ToList(),
-                    BirthDate = pet.BirthDate,
+                    BirthDate = pet.DateToText(pet.BirthDate),
                     Description = pet.Description
                 };
             }
@@ -70,7 +90,7 @@ namespace petApi.Models
                 return new Pet()
                 {
                     Description = addedPet.Description,
-                    BirthDate = addedPet.BirthDate,
+                    BirthDate = addedPet.TextToDate(addedPet.BirthDate),
                     Name = addedPet.Name,
                     Picture = addedPet.Picture
                 };
@@ -80,7 +100,7 @@ namespace petApi.Models
 
         public static Pet MapEditPetDTOToPet(EditPetDTO editPetDTO, Pet pet)
         {
-            pet.BirthDate = editPetDTO.BirthDate;
+            pet.BirthDate = editPetDTO.TextToDate(editPetDTO.BirthDate);
             pet.Description = editPetDTO.Description;
             pet.Name = editPetDTO.Name;
             pet.Picture = editPetDTO.Picture;

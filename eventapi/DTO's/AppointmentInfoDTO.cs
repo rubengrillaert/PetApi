@@ -13,7 +13,7 @@ namespace petApi.DTO_s
         public string Title { get; set; }
         public string Pet { get; set; }
         public string PetPicture { get; set; }
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
         public string Description { get; set; }
         public string Doctor { get; set; }
         public string Street { get; set; }
