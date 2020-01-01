@@ -45,7 +45,7 @@ namespace petApi.Models
             string houres = date.Hour < 10 ? "0" + date.Hour : "" + date.Hour;
             string minutes = date.Minute < 10 ? "0" + date.Minute : "" + date.Minute;
 
-            return "" + date.Year + "-" + month + "-" + day + "-" + houres + "-" + minutes;
+            return "" + date.Year + "-" + month + "-" + day + "-" + houres + ":" + minutes;
         }
 
         public void AddAppointment(Appointment appointment)
