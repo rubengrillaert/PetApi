@@ -17,12 +17,14 @@ namespace petApi.Controllers
     {
         #region Properties
         private readonly IPetRepository _petRepository;
+        private readonly IAppointmentRepository _appointmentRepository;
         #endregion
 
         #region Constructors
-        public PetController(IPetRepository petRepository)
+        public PetController(IPetRepository petRepository, IAppointmentRepository appointmentRepository)
         {
             _petRepository = petRepository;
+            _appointmentRepository = appointmentRepository;
         }
         #endregion
 
@@ -80,6 +82,11 @@ namespace petApi.Controllers
             }
             try
             {
+                foreach(Appointment appointment in pet.Appointments)
+                {
+                    _appointmentRepository.DeleteAppointment(appointment.Id);
+                }
+                _appointmentRepository.SaveChanges();
                 _petRepository.DeletePet(id);
                 _petRepository.SaveChanges();
             }
